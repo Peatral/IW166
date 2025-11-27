@@ -3,7 +3,8 @@ import { evaluateArgs } from "./evaluate_args.ts";
 import { loadDB } from "./hashdb.ts";
 import { runForFiles } from "./path_utils.ts";
 import { Spinner } from "@std/cli/unstable-spinner";
-import { generateReport } from "./pdf_output.ts";
+import ReactPDF from "@react-pdf/renderer";
+import Report from "./Report.tsx";
 
 if (import.meta.main) {
   const params = Deno.args;
@@ -101,7 +102,7 @@ if (import.meta.main) {
 
     const endDate = new Date(Date.now());
 
-    generateReport({
+    ReactPDF.render(Report({
       path: outputPath,
       evidencePath,
       investigator,
@@ -110,7 +111,7 @@ if (import.meta.main) {
       foundFiles,
       startTime: startDate,
       endTime: endDate,
-    });
+    }), outputPath);
 
     const formattedDuration = new Intl.DurationFormat("en", { style: "long" })
       .format(
