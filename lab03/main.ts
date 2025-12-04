@@ -113,7 +113,9 @@ if (import.meta.main) {
       endTime: endDate,
     }), outputPath);
 
-    const formattedDuration = new Intl.DurationFormat("en", { style: "long" })
+    // TODO: The type definitions are still missing
+    // deno-lint-ignore no-explicit-any
+    const formattedDuration = new (Intl as any).DurationFormat("en", { style: "long" })
       .format(
         endDate.toTemporalInstant().since(startDate.toTemporalInstant()).round(
           "second",
