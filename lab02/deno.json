@@ -1,0 +1,13 @@
+{
+  "tasks": {
+    "compile": "deno compile --allow-all --unstable-raw-imports main.ts",
+    "ransom:encrypt": "deno run --allow-all main.ts",
+    "ransom:decrypt": "deno run --allow-all main.ts --decrypt",
+    "ransom:genkeys": "deno run --allow-all main.ts --generate-keys"
+  },
+  "imports": {
+    "@std/assert": "jsr:@std/assert@1",
+    "@std/fs": "jsr:@std/fs@^1.0.19",
+    "@std/path": "jsr:@std/path@^1.1.2"
+  }
+}
