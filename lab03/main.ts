@@ -1,7 +1,7 @@
-import { WalkEntry } from "@std/fs/walk";
+import type { WalkEntry } from "@std/fs/walk";
+import { runForFiles } from "@iw166/utils/path";
 import { evaluateArgs } from "./evaluate_args.ts";
 import { loadDB } from "./hashdb.ts";
-import { runForFiles } from "./path_utils.ts";
 import { Spinner } from "@std/cli/unstable-spinner";
 import ReactPDF from "@react-pdf/renderer";
 import Report from "./Report.tsx";
@@ -42,7 +42,7 @@ if (import.meta.main) {
       string,
       { type: string; info: Deno.FileInfo; files: WalkEntry[] }
     >();
-    await runForFiles(evidencePath, (entry, hashes) => {
+    await runForFiles(evidencePath, [], (entry, hashes) => {
       let any = false;
       for (const key of Object.keys(hashes)) {
         const hash = hashes[key as keyof typeof hashes];
@@ -102,20 +102,25 @@ if (import.meta.main) {
 
     const endDate = new Date(Date.now());
 
-    ReactPDF.render(Report({
-      path: outputPath,
-      evidencePath,
-      investigator,
-      checkedFiles,
-      foundFileCount,
-      foundFiles,
-      startTime: startDate,
-      endTime: endDate,
-    }), outputPath);
+    ReactPDF.render(
+      Report({
+        path: outputPath,
+        evidencePath,
+        investigator,
+        checkedFiles,
+        foundFileCount,
+        foundFiles,
+        startTime: startDate,
+        endTime: endDate,
+      }),
+      outputPath,
+    );
 
     // TODO: The type definitions are still missing
     // deno-lint-ignore no-explicit-any
-    const formattedDuration = new (Intl as any).DurationFormat("en", { style: "long" })
+    const formattedDuration = new (Intl as any).DurationFormat("en", {
+      style: "long",
+    })
       .format(
         endDate.toTemporalInstant().since(startDate.toTemporalInstant()).round(
           "second",

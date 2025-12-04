@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  Document,
-  Page,
-  StyleSheet,
-  Text,
-  View,
-} from "@react-pdf/renderer";
+import { Document, Page, StyleSheet, Text, View } from "@react-pdf/renderer";
 import { WalkEntry } from "@std/fs/walk";
 import { Table, TD, TH, TR } from "@ag-media/react-pdf-table";
 
@@ -82,13 +76,18 @@ export default function Report({
           </Text>
           <View style={{ marginTop: 25 }}>
             <Text>
-              <Text style={{fontWeight: "600"}}>Start der Untersuchung:</Text> {dateTimeFormat.format(startTime)}
+              <Text style={{ fontWeight: "600" }}>Start der Untersuchung:</Text>
+              {" "}
+              {dateTimeFormat.format(startTime)}
             </Text>
             <Text>
-              <Text style={{fontWeight: "600"}}>Ende der Untersuchung:</Text> {dateTimeFormat.format(endTime)}
+              <Text style={{ fontWeight: "600" }}>Ende der Untersuchung:</Text>
+              {" "}
+              {dateTimeFormat.format(endTime)}
             </Text>
-            <Text style={{marginTop: 10}}>
-              Insgesamt wurden {foundFileCount} Dateien gefunden in {checkedFiles} gescannten Dateien.
+            <Text style={{ marginTop: 10 }}>
+              Insgesamt wurden {foundFileCount} Dateien gefunden in{" "}
+              {checkedFiles} gescannten Dateien.
             </Text>
           </View>
           <Table
@@ -96,19 +95,41 @@ export default function Report({
             style={{ marginTop: 10, fontSize: 12 }}
           >
             <TH>
-              {headers.map((title, idx) => <TD key={idx} style={{padding: 4, minWidth: 15}}>{title}</TD>)}
+              {headers.map((title, idx) => (
+                <TD key={idx} style={{ padding: 4, minWidth: 15 }}>{title}</TD>
+              ))}
             </TH>
             {rows.map((row, rowIdx) => (
-              <TR key={rowIdx} style={{ backgroundColor: !(rowIdx % 2) ? "lightgrey": "white" }}>
+              <TR
+                key={rowIdx}
+                style={{
+                  backgroundColor: !(rowIdx % 2) ? "lightgrey" : "white",
+                }}
+              >
                 {row.map((text, colIdx) => (
-                  <TD key={colIdx} style={{flexDirection: "row", flexWrap: "wrap", padding: 4, minWidth: 15}}>
+                  <TD
+                    key={colIdx}
+                    style={{
+                      flexDirection: "row",
+                      flexWrap: "wrap",
+                      padding: 4,
+                      minWidth: 15,
+                    }}
+                  >
                     {colIdx === 1
                       ? text.split("").map((letter, letterIdx) => (
-                        <View key={letterIdx}><Text>{letter}</Text></View>
+                        <View key={letterIdx}>
+                          <Text>{letter}</Text>
+                        </View>
                       ))
                       : colIdx === 4
-                      ? text.split("/").filter(t => !!t).map((part, partIdx) => (
-                        <View key={partIdx}><Text>/{part}</Text></View>
+                      ? text.split("/").filter((t) => !!t).map((
+                        part,
+                        partIdx,
+                      ) => (
+                        <View key={partIdx}>
+                          <Text>/{part}</Text>
+                        </View>
                       ))
                       : <Text>{text}</Text>}
                   </TD>

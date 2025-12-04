@@ -1,3 +1,6 @@
 {
-  "workspace": ["./lab02", "./lab03"]
+  "workspace": ["./utils", "./lab02", "./lab03"],
+  "tasks": {
+    "compile": "deno task --cwd=lab02 compile && deno task --cwd=lab03 compile"
+  }
 }

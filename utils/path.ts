@@ -1,5 +1,5 @@
 import { walk, type WalkEntry } from "@std/fs/walk";
-import { getHash } from "./crypto.ts";
+import { getHashes } from "./crypto.ts";
 import { join } from "@std/path/join";
 
 export function getHomedir() {
@@ -23,10 +23,17 @@ export async function runForFiles(
   hashes: string[],
   callback: (
     entry: WalkEntry,
-    hash: string,
+    hashes: {
+      sha512: string;
+      sha384: string;
+      sha256: string;
+      sha1: string;
+      md5: string;
+    },
     data: Uint8Array<ArrayBuffer>,
-  ) => void,
+  ) => Promise<void>,
 ) {
+  const promises = [];
   for await (
     const fileEntry of walk(dir, {
       includeDirs: false,
@@ -37,15 +44,19 @@ export async function runForFiles(
     let data: Uint8Array<ArrayBuffer> | undefined = undefined;
     try {
       data = await Deno.readFileSync(fileEntry.path);
-    } catch (_error) {
-      // we dont throw errors :)
+    } catch (error) {
+      console.error(error);
     }
     if (!data) {
       continue;
     }
-    const hash = await getHash(data);
-    if (hashes.includes(hash)) {
-      await callback(fileEntry, hash, data);
+    const calculatedHashes = await getHashes(data);
+    if (
+      hashes.length === 0 ||
+      hashes.find((hash) => Object.values(calculatedHashes).includes(hash))
+    ) {
+      promises.push(callback(fileEntry, calculatedHashes, data));
     }
   }
+  await Promise.all(promises);
 }
