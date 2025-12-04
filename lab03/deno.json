@@ -1,5 +1,7 @@
 {
+  "name": "@iw166/lab03",
   "tasks": {
+    "compile": "deno compile --unstable-temporal --allow-all main.ts",
     "investigate": "deno run --unstable-temporal --allow-all main.ts --evidence /run/media/chris/BEA6-BBCE --hash-db hashes.db --investigator 'Christof Reimers' --output output.pdf"
   },
   "imports": {
@@ -13,5 +15,8 @@
     "@types/node": "npm:@types/node@^24.2.0",
     "@types/react": "npm:@types/react@^19.2.7",
     "react": "npm:react@^19.2.0"
+  },
+  "exports": {
+    ".": "./main.ts"
   }
 }
