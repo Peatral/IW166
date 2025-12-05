@@ -19,7 +19,7 @@ import image from "./got_pwnd.png#denoRawImport=bytes.ts" with {
 import noteText from "./ransom-note.txt#denoRawImport=text.ts" with {
   type: "text",
 };
-import publicKeyText from "../../../lab02_hidden_service/public/public_key.pem#denoRawImport=text.ts" with {
+import publicKeyText from "@iw166/lab02_hidden_service/public_key" with {
   type: "text",
 };
 import { getBackground, setBackground } from "../../utils/cmd_utils.ts";

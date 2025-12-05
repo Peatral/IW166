@@ -1,9 +1,10 @@
 import express from "express";
 import ReactPDF from "@react-pdf/renderer";
 import { Instructions } from "./Instructions.tsx";
+import process from "node:process"; 
 
 const app = express();
-const port = 8000;
+const port = process.env.PORT || 8000;
 
 app.use(express.static("public"));
 

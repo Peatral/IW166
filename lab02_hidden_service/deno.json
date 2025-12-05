@@ -1,4 +1,5 @@
 {
+  "name": "@iw166/lab02_hidden_service",
   "tasks": {
     "dev": "deno run --watch --allow-all main.ts"
   },
@@ -8,5 +9,8 @@
     "@types/react": "npm:@types/react@^19.2.7",
     "express": "npm:express@^5.2.1",
     "react": "npm:react@^19.2.1"
+  },
+  "exports": {
+    "./public_key": "./public/public_key.pem#denoRawImport=text.ts"
   }
 }
