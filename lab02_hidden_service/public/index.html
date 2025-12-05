@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regain Access</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <div className="container">
+      <form id="password-form">
+        <input
+          type="password"
+          id="password-input"
+          placeholder="Enter Access Key"
+          required
+        />
+        <button type="submit">Unlock Access</button>
+      </form>
+      <p id="message"></p>
+
+      <div id="download-area" style="display: none">
+        <h2>Available Files:</h2>
+        <ul>
+          <li>
+            <a href="instructions.pdf" download>Instructions</a>
+          </li>
+          <li>
+            <a href="private_key.pem" download>Private Key</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
